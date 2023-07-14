@@ -44,14 +44,4 @@ public class TestController {
 		return postMapper.selectPostList();
 	}
 	
-	@RequestMapping("/sign_in")
-	public String sign_in() {
-		return "memo/sign_in";
-	}
-	
-	@RequestMapping("/sign_up")
-	public String sign_up() {
-		return "memo/sign_up";
-	}
-	
 }

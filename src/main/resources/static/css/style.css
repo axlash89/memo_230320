@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+#wrap {
+}
+
+header {
+	height: 80px;
+	background-color: lightgrey;
+}
+
+footer {
+	height: 80px;
+    background-color: lightgrey;
+    font-size: 17px
+}
+
+.contents {
+    min-height: 500px; 
+}
+
+.left-side {
+    background-color: lightgrey;
+    width: 250px;
+}
+
+.right-side {
+    width: 400px;
+}

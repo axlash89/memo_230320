@@ -1,24 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>
-            메모 게시판 로그인
-        </title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
-               
-        <link rel="stylesheet" type="text/css" href="/css/memo/style.css">
-    </head>
-    <body id="wrap" class="container">
-
-        <header>
-            <div id="top" class="h2 font-weight-bold d-flex align-items-center pl-4">메모 게시판</div>
-        </header>
-        <section class="contents d-flex justify-content-center align-items-center">
-            <div>
+			<div class="d-flex justify-content-center align-items-center mt-5">
                 <form method="post" action="">
                     
                     <table class="table">
@@ -28,11 +10,15 @@
                             </th>
                             <td class="right-side">
                                 <div class="d-flex">
-                                    <input type="text" class="form-control col-8 ml-2" name="loginId" placeholder="아이디 입력">
+                                    <input type="text" class="form-control col-8 ml-2" name="loginId" id="loginId" placeholder="아이디 입력">
                                     <input type="button" class="btn btn-info ml-3" id="duplicatedIdCheck" value="중복확인">
                                 </div>
                                 <div>
-                                    &nbsp;
+                                    <%-- 아이디 체크 결과 --%>
+									<%-- d-none 클래스: display none (보이지 않게) --%>
+									<div id="idCheckLength" class="small text-danger d-none">ID를 4자 이상 입력해주세요.</div>
+									<div id="idCheckDuplicated" class="small text-danger d-none">이미 사용중인 ID입니다.</div>
+									<div id="idCheckOk" class="small text-success d-none">사용 가능한 ID 입니다.</div>
                                 </div>
                             </td>
                         </tr>
@@ -74,10 +60,46 @@
                     </div>
                 </form>
             </div>
-        </section>
-        <footer>
-            <div id="bottom" class="font-weight-bold d-flex justify-content-center align-items-center">copyright marobiana</div>
-        </footer>
-
-    </body>
-</html>
+            
+            <script>
+            	$(document).ready(function() {
+            		
+            		$('#duplicatedIdCheck').on('click', function() {
+            			// alert("클릭");
+            			
+            			let loginId = $('#loginId').val().trim();
+            			
+            			// 경고 문구 초기화
+            			$('#idCheckLength').addClass('d-none');
+            			$('#idCheckDuplicated').addClass('d-none');
+            			$('#idCheckOk').addClass('d-none');
+            			
+            			if (loginId.length < 4) {
+            				$('#idCheckLength').removeClass('d-none');
+            				return;
+            			}
+            			
+            			
+            			$.ajax({
+            				// request
+            				url:"/user/is_duplicated_id"
+            				, data: {"loginId":loginId}
+            				, success: function(data) {
+            					if(data.isDuplicatedId) {
+            						// 중복일 때
+            						$('#idCheckDuplicated').removeClass('d-none');
+            					} else {	
+            						// 중복이 아닐 때 => 사용 가능
+            						$('#idCheckOk').removeClass('d-none');
+            					}
+            				}
+            				// response
+                    		, error: function(request, status, error) {
+                    			alert("중복확인에 실패했습니다.");
+                    		}            				
+                		});
+            			
+            		});           
+            		
+            	});
+            </script>

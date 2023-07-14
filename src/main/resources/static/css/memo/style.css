@@ -1,0 +1,27 @@
+#wrap {
+    height: 550px;
+}
+
+#top {
+    height: 70px;
+    background-color: lightgrey;
+}
+
+.contents {
+    height: 410px; 
+}
+
+#bottom {
+    height: 70px;
+    background-color: lightgrey;
+    font-size: 17px;
+}
+
+.left-side {
+    background-color: lightgrey;
+    width: 250px;
+}
+
+.right-side {
+    width: 400px;
+}

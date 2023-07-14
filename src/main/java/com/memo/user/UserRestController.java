@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/user")
 @RestController
 public class UserRestController {
-
+	
+	
+	// 중복확인 버튼
 	@RequestMapping("/is_duplicated_id")
 	public Map<String, Object> isDuplicatedId(
 			@RequestParam("loginId") String loginId) {
@@ -23,5 +25,6 @@ public class UserRestController {
 		return result;
 		
 	}
+	
 	
 }

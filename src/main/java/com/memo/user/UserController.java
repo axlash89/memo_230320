@@ -18,7 +18,7 @@ public class UserController {
 	@GetMapping("/sign_in_view")
 	public String signInview(Model model) {
 		model.addAttribute("view", "user/signIn");
-		return "template/layout";  // layout이라고 되어있는 것이 조각들이 모여져있는 전체 페이지
+		return "template/layout";
 	}
 
 }

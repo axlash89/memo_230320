@@ -18,11 +18,21 @@ footer {
     min-height: 500px; 
 }
 
+#loginBox {
+	height: 450px;
+}
+
+#signUpBox {
+	height: 450px;
+}
+
 .left-side {
     background-color: lightgrey;
     width: 250px;
+    height: 55px;
 }
 
 .right-side {
     width: 400px;
+    height: 55px;
 }

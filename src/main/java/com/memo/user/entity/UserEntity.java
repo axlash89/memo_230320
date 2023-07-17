@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @ToString
-@Builder
+@Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "user")

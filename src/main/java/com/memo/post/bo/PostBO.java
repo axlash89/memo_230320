@@ -28,11 +28,9 @@ public class PostBO {
 		
 		// 이미지가 있으면 업로드 후 imagePath 받아옴
 		String imagePath = null;
-		return postMapper.insert~~~
+		
+		return postMapper.insertPost(userId, subject, content, imagePath);
 		
 	}
 	
-	// sns 회원가입/로그인, 타임라인 postList 뿌리는거까지 하기
-//	imagepath는 null 로 들어가는데 나머지 해보기
-//	끌쓰기 완료 해보기
 }

@@ -114,7 +114,7 @@ public class UserRestController {
 			HttpSession session = request.getSession();
 			session.setAttribute("userId", userEntity.getId());
 			session.setAttribute("userLoginId", userEntity.getLoginId());
-			session.setAttribute("userName", userEntity.getName());			
+			session.setAttribute("userName", userEntity.getName());
 			result.put("code", 1);
 			result.put("result", "성공");			
 		} else {

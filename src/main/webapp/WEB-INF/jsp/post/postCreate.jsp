@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <div class="d-flex justify-content-center">
 	<div class="w-50">
+	
 		<h1>글 쓰기</h1>
 		
 		<input type="text" id="subject" class="form-control" placeholder="제목을 입력하세요">
@@ -10,15 +11,12 @@
 			<input type="file" id="file" accept=".jpg, .jpeg, .png, .gif">
 		</div>
 		
-		<div class="d-flex justify-content-between">
-		
-			<button type="button" id="postListBtn" class="btn btn-dark">목록</button>
-			
+		<div class="d-flex justify-content-between">		
+			<button type="button" id="postListBtn" class="btn btn-dark">목록</button>			
 			<div>
 				<button type="button" id="clearBtn" class="btn btn-secondary">모두 지우기</button>
 				<button type="button" id="saveBtn" class="btn btn-info">저장</button>
-			</div>
-			
+			</div>			
 		</div>
 		
 	</div>
@@ -35,6 +33,9 @@ $(document).ready(function() {
 	
 	// 모두 지우기 버튼
 	$('#clearBtn').on('click', function() {
+		if(!confirm('작성한 제목과 내용을 모두 지우시겠습니까?')){
+            return false;
+        }
 		$('#subject').val("");
 		$('#content').val("");
 	});
@@ -63,7 +64,7 @@ $(document).ready(function() {
 			let ext = file.split(".").pop().toLowerCase();
 			// alert(ext);
 			
-			if ($.inArray(ext, ['jpg', 'jpeg', 'png', 'gif']) == -1) {
+			if ($.inArray(ext, ['jpg', 'jpeg', 'png', 'gif']) == -1) {  // 요소가 없으면 -1을 반환
 				alert("이미지 파일만 업로드 가능합니다.")
 				$('#file').val('');  // 파일을 비운다.
 				return;
@@ -95,12 +96,12 @@ $(document).ready(function() {
 					location.href="/post/post_list_view"
 				} else {
 					// 로직 상 실패
-					alert(Data.errorMessage);
+					alert(data.errorMessage);
 				}
 			}
 			
 			, error:function(request, status, error) {
-				alert("메모를 저장하는데 실패했습니다.");
+				alert("메모를 저장하는데 실패했습니다. 관리자에게 문의하세요.");
 			}
 			
 		});

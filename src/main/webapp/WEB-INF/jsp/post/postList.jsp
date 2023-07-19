@@ -34,7 +34,7 @@
 							<fmt:formatDate value="${parsedUpdatedAt}" pattern="yyyy년 M월 d일 HH:mm:ss"/>
 						</td>
 					</tr>
-				</c:forEach>				
+				</c:forEach>	
 			</tbody>
 			
 		</table>

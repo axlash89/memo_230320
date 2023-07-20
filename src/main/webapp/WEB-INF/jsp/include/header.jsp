@@ -3,7 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 헤더 -->
 <div class="d-flex justify-content-between align-items-center">
-	<div class="h1 font-weight-bold pl-4">메모 게시판</div>
+	<c:choose>
+		<c:when test="${not empty userName}">
+			<a href="/post/post_list_view" class="logo-text"><div class="h1 font-weight-bold pl-4">메모 게시판</div></a>
+		</c:when>
+		<c:otherwise>
+			<a href="/user/sign_in_view" class="logo-text"><div class="h1 font-weight-bold pl-4">메모 게시판</div></a>
+		</c:otherwise>
+	</c:choose>
 	<div>
 		<div>&nbsp;</div>
 		<div>&nbsp;</div>

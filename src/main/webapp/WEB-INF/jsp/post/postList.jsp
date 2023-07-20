@@ -18,7 +18,7 @@
 			</thead>
 				
 			<tbody>
-				<c:forEach items="${postList}" var="post">			
+				<c:forEach items="${postList}" var="post" varStatus="status">			
 					<tr>
 						<td>${post.id}</td>
 						<td>

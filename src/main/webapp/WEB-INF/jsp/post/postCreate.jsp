@@ -57,7 +57,20 @@ $(document).ready(function() {
 			return;
 		}
 		
-		// 파일이 업로드 된 경우에만 확장자 체크
+		function lessThanFiveMegaBytes(){
+			if(document.getElementById("file").value!=""){
+				let fileSize = document.getElementById("file").files[0].size;
+				let maxSize = 5 * 1024 * 1024;  // 5MB
+				
+				if(fileSize > maxSize){				
+					return false;
+				} else {
+					return true;
+				}
+			}
+		}
+		
+		// 파일이 업로드 된 경우에만 확장자, 용량 체크
 		if (file != "") {
 			// C:\fakepath\Part1-Day08-20230314_API_예시.ipynb
 			// 확장자만 뽑은 후 소문자로 변경한다.
@@ -69,6 +82,14 @@ $(document).ready(function() {
 				$('#file').val('');  // 파일을 비운다.
 				return;
 			}
+			
+			if(lessThanFiveMegaBytes() == false) {
+				alert("첨부파일 사이즈는 5MB 이내로 등록 가능합니다. ");
+				$('#file').val("");  // 파일 태그에 파일 제거(보이지 않지만 업로드 될 수 있으므로 주의)
+				$('#fileName').text('');
+				return;
+			}
+			
 		}
 		
 		// AJAX 통신

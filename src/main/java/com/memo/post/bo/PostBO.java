@@ -25,8 +25,7 @@ public class PostBO {
 		return postMapper.selectPostListByUserId(userId);
 	}
 	
-	
-	// input : 
+	// input : int userId, String userLoginId, String subject, String content, MultipartFile file
 	// output : 성공된 행의 개수
 	public int addPost(int userId, String userLoginId, String subject, String content, MultipartFile file) {
 		

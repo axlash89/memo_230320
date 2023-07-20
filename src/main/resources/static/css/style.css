@@ -36,3 +36,8 @@ footer {
     width: 400px;
     height: 55px;
 }
+
+.logo-text, .logo-text:hover {
+	color:black;
+	text-decoration: none;
+}

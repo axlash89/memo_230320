@@ -92,7 +92,7 @@ $(document).ready(function() {
 			//response
 			, success: function(data) {
 				if (data.code == 1) {
-					alert("메모가 저장되었습니다.")
+					alert("메모가 저장되었습니다.");
 					location.href="/post/post_list_view"
 				} else {
 					// 로직 상 실패

@@ -23,16 +23,17 @@ public class PostRestController {
 	
 	@PostMapping("/create")
 	public Map<String, Object> create(
-			@RequestParam("subject") String subject,
 			@RequestParam("content") String content,
+			@RequestParam("subject") String subject,
 			@RequestParam(value = "file", required = false) MultipartFile file,
 			HttpSession session) {
 		
 		// 세션에서 유저 정보 받아옴
 		int userId = (int)session.getAttribute("userId");
+		String userLoginId = (String)session.getAttribute("userLoginId");
 				
 		// db insert
-		int row = postBO.addPost(userId, subject, content, file);
+		int row = postBO.addPost(userId, userLoginId, subject, content, file);
 		
 		Map<String, Object> result = new HashMap<>();
 		

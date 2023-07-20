@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.memo.common.FileManagerService;
 import com.memo.post.dao.PostMapper;
 import com.memo.post.domain.Post;
 
@@ -14,6 +15,9 @@ public class PostBO {
 	
 	@Autowired
 	private PostMapper postMapper;  // mybatis
+	
+	@Autowired
+	private FileManagerService fileManager;
 	
 	// input : userId(글쓴이)
 	// output : List<Post>
@@ -24,10 +28,14 @@ public class PostBO {
 	
 	// input : 
 	// output : 성공된 행의 개수
-	public int addPost(int userId, String subject, String content, MultipartFile file) {
+	public int addPost(int userId, String userLoginId, String subject, String content, MultipartFile file) {
+		
+		String imagePath = null;
 		
 		// 이미지가 있으면 업로드 후 imagePath 받아옴
-		String imagePath = null;
+		if (file != null) {
+			imagePath = fileManager.saveFile(userLoginId, file);
+		}
 		
 		return postMapper.insertPost(userId, subject, content, imagePath);
 		

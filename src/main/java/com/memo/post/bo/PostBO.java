@@ -40,4 +40,8 @@ public class PostBO {
 		
 	}
 	
+	public Post getPostByPostIdAndUserId(int postId, int userId) {
+		return postMapper.selectPostByPostIdAndUserId(postId, userId);
+	}
+	
 }

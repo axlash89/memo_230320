@@ -72,11 +72,20 @@ public class PostBO {
 				// 이미지 제거
 				fileManager.deleteFile(post.getImagePath());
 			}
-		}		
+		}
 		
 		// 글 업데이트
 		postMapper.updatePostByPostIdAndUserId(postId, userId, subject, content, imagePath);
 		
+	}
+	
+	public int deletePost(int postId, int userId) {
+		Post post = getPostByPostIdAndUserId(postId, userId);	
+		if (post.getImagePath() != null) {
+			fileManager.deleteFile(post.getImagePath());	
+		}		
+		
+		return postMapper.deletePostByPostId(postId);
 	}
 		
 	

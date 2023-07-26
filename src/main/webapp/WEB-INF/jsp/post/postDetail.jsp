@@ -19,7 +19,7 @@
 		</div>
 		
 		<div class="d-flex justify-content-between">		
-			<button type="button" id="deleteBtn" class="btn btn-secondary">삭제</button>			
+			<button type="button" id="deleteBtn" class="btn btn-secondary" data-post-id="${post.id}">삭제</button>			
 			<div>
 				<a href="/post/post_list_view" class="btn btn-dark">목록</a>
 				<button type="button" id="updateBtn" class="btn btn-info" data-post-id="${post.id}">수정</button>
@@ -84,7 +84,7 @@ $(document).ready(function() {
 			, success:function(data) {
 				if (data.code == 1) {
 					alert("메모가 수정되었습니다.");
-					
+					location.reload(true);
 				} else {
 					alert(data.errorMessage);
 				}
@@ -94,6 +94,37 @@ $(document).ready(function() {
 			}
 		});
 		
+	});
+	
+	$('#deleteBtn').on('click', function() {		
+			
+		let postId = $(this).data('post-id');
+		
+		let formData = new FormData();
+		formData.append("postId", postId);
+			
+		$.ajax({
+		
+			// request
+			type: "delete"
+			, url: "/post/delete"
+			, data: formData
+			, processData: false  // 파일 업로드를 위한 필수 설정
+			, contentType: false  // 파일 업로드를 위한 필수 설정
+			
+			// response
+			, success:function(data) {
+				if (data.code == 1) {
+					alert("메모가 삭제되었습니다.");
+					location.href="/post/post_list_view";
+				} else {
+					alert(data.errorMessage);
+				}
+			}
+			, error:function(request, status, error) {
+				alert("메모 삭제 실패하였습니다. 관리자에게 문의하세요.");
+			}
+		});
 	});
 	
 });

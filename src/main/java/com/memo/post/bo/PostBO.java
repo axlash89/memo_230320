@@ -41,6 +41,9 @@ public class PostBO {
 		// 이미지가 있으면 업로드 후 imagePath 받아옴
 		if (file != null) {
 			imagePath = fileManager.saveFile(userLoginId, file);
+			if (imagePath == null) {
+				return 0;
+			}
 		}
 		
 		return postMapper.insertPost(userId, subject, content, imagePath);

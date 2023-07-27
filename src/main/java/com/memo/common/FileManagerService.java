@@ -21,8 +21,8 @@ public class FileManagerService {
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	// 실제 업로드가 된 이미지가 저장될 경로(서버)
-//	public static final String FILE_UPLOAD_PATH = "C:\\Users\\axlas\\Desktop\\kotaeyoung\\6_spring_project\\memo\\workspace\\images/";
-	public static final String FILE_UPLOAD_PATH = "D:\\kotaeyoung\\6_spring_project\\memo\\workspace\\images/";
+	public static final String FILE_UPLOAD_PATH = "C:\\Users\\axlas\\Desktop\\kotaeyoung\\6_spring_project\\memo\\workspace\\images/";
+//	public static final String FILE_UPLOAD_PATH = "D:\\kotaeyoung\\6_spring_project\\memo\\workspace\\images/";
 	// 마지막에 / 붙인다.
 	
 	// input : loginId, MultipartFile(이미지 파일) 
@@ -37,6 +37,7 @@ public class FileManagerService {
 		File directory = new File(filePath);
 		if (directory.mkdir() == false) {
 			// 폴더 만드는데 실패 시 이미지 경로를 null로 리턴
+			logger.error("###[FileManagerService 폴더 생성 실패] FILE_UPLOAD_PATH:{}", FILE_UPLOAD_PATH);
 			return null;
 		}
 		

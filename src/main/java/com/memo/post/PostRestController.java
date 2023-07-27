@@ -52,6 +52,15 @@ public class PostRestController {
 		
 	}
 	
+	/**
+	 * 글 수정 API
+	 * @param postId
+	 * @param subject
+	 * @param content
+	 * @param file
+	 * @param session
+	 * @return
+	 */
 	@PutMapping("/update")
 	public Map<String, Object> update(
 			@RequestParam("postId") int postId,
@@ -82,7 +91,7 @@ public class PostRestController {
 		
 		int userId = (int) session.getAttribute("userId");
 		
-		int row = postBO.deletePost(postId, userId);
+		int row = postBO.deletePostByPostIdAndUserId(postId, userId);
 		
 		Map<String, Object> result = new HashMap<>();
 		if (row > 0) {
@@ -96,6 +105,4 @@ public class PostRestController {
 		
 	}
 	
-	
-
 }

@@ -96,21 +96,18 @@ $(document).ready(function() {
 		
 	});
 	
+	
+	// 삭제
 	$('#deleteBtn').on('click', function() {		
 			
 		let postId = $(this).data('post-id');
-		
-		let formData = new FormData();
-		formData.append("postId", postId);
 			
 		$.ajax({
 		
 			// request
 			type: "delete"
 			, url: "/post/delete"
-			, data: formData
-			, processData: false  // 파일 업로드를 위한 필수 설정
-			, contentType: false  // 파일 업로드를 위한 필수 설정
+			, data: {"postId": postId}
 			
 			// response
 			, success:function(data) {
@@ -121,10 +118,13 @@ $(document).ready(function() {
 					alert(data.errorMessage);
 				}
 			}
+			
 			, error:function(request, status, error) {
 				alert("메모 삭제 실패하였습니다. 관리자에게 문의하세요.");
 			}
+			
 		});
+		
 	});
 	
 });

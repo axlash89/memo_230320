@@ -30,10 +30,11 @@ public class PostController {
 		// 로그인이 되었는지 확인
 		Integer userId = (Integer)session.getAttribute("userId");
 		
-		if (userId == null) {
-			// 비로그인이면 로그인 페이지로 이동
-			return "redirect:/user/sign_in_view";
-		}
+		// 인터셉터로 한번에 검사하므로 이제 필요없음.
+//		if (userId == null) {
+//			// 비로그인이면 로그인 페이지로 이동
+//			return "redirect:/user/sign_in_view";
+//		}
 		
 		// DB 글 목록 조회
 		List<Post> postList = postBO.getPostListByUserId(userId, prevIdParam, nextIdParam);
@@ -41,6 +42,7 @@ public class PostController {
 		int prevId = 0;
 		
 		if (postList.isEmpty() == false) {
+			
 			// postList가 비어있을 때 오류 방지
 			nextId = postList.get(postList.size() - 1).getId();  // 가져온 리스트의 가장 끝 값 (작은 id)
 			prevId = postList.get(0).getId();

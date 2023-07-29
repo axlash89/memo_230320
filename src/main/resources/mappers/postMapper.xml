@@ -25,7 +25,7 @@
  		WHERE 
  			`userId` = #{userId}
  			
- 		<if test="direction == null">	
+ 		<if test="direction == null">
 	 	ORDER BY `id` DESC
  		</if>
  		<if test="direction == 'prev'">
@@ -40,6 +40,19 @@
  		ORDER BY `id` DESC
  		</if>
  		LIMIT ${3}
+ 	</select>
+ 	
+ 	<select id="selectPostIdByUserIdAndSort" parameterType="map" resultType="int">
+ 		
+ 		SELECT
+ 			`id`
+ 		FROM
+ 			`post`
+ 		WHERE
+ 			`userId` = #{userId}
+ 		ORDER BY `id` ${sort}
+ 		LIMIT 1
+ 		
  	</select>
  	
  	<insert id="insertPost" parameterType="map">
@@ -77,19 +90,6 @@
  		WHERE 
  			`userId` = #{userId}
  			AND `id` = #{postId}
- 	</select>
- 	
- 	<select id="selectPostIdByUserIdAndSort" parameterType="map" resultType="int">
- 		
- 		SELECT
- 			`id`
- 		FROM
- 			`post`
- 		WHERE
- 			`userId` = #{userId}
- 		ORDER BY `id` ${sort}
- 		LIMIT 1
- 		
  	</select>
  	
  	<update id="updatePostByPostIdAndUserId" parameterType="map">

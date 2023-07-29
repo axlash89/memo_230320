@@ -37,7 +37,6 @@ public class PostBO {
 		// 1) 다음 : 2보다 작은 3개 DESC
 		// 2) 이전 : 4보다 큰 3개 ASC (5 6 7) => List reverse (7 6 5)
 		// 3) 첫 페이지 일 때 (이전, 다음 없음) DESC 3개
-
 		
 		String direction = null;  // 방향
 		Integer standardId = null;  // 기준 postId
@@ -73,13 +72,13 @@ public class PostBO {
 	// 이전 방향의 끝인지 확인
 	// input: prevId, userId
 	// output: boolean
-	public boolean isPrevLastPage(int prevId, int userId) {		
+	public boolean isPrevLastPage(int prevId, int userId) {
 		int postId = postMapper.selectPostIdByUserIdAndSort(userId, "DESC");
-		return postId == prevId;  // 같으면 끝, 아니면 끝 아님		
+		return postId == prevId;  // 같으면 끝, 아니면 끝 아님	
 	}
 	
 	// 다음 방향의 끝인지 확인
-	public boolean isNextLastPage(int nextId, int userId) {		
+	public boolean isNextLastPage(int nextId, int userId) {
 		return nextId == postMapper.selectPostIdByUserIdAndSort(userId, "ASC");		
 	}
 		
